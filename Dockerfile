@@ -6,9 +6,9 @@ EXPOSE 5244
 
 CMD sh -c '\
 ./alist server \
---db-type="${ALIST_DB_TYPE:-postgres}" \
+--db-type="${ALIST_DB_TYPE:-sqlite}" \
 --db-host="${ALIST_DB_HOST}" \
 --db-port="${ALIST_DB_PORT:-5432}" \
 --db-user="${ALIST_DB_USER}" \
---db-pass="${ALIST_DB_PASS}" \
+--db-password="${ALIST_DB_PASSWORD}" \
 --db-name="${ALIST_DB_NAME}"'
