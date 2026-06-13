@@ -1,14 +1,14 @@
 FROM xhofe/alist:latest
+
 WORKDIR /opt/alist
-USER root
+
 EXPOSE 5244
 
-CMD sh -c "\
-    ./alist server & PID=\$!; \
-    sleep 3; \
-    if [ -n \"\$ALIST_ADMIN_PASSWORD\" ]; then \
-        echo '🔑 检测到密码环境变量，正在设置初始密码...'; \
-        ./alist admin set \"\$ALIST_ADMIN_PASSWORD\"; \
-    fi; \
-    echo '✅ AList 启动成功！'; \
-    wait \$PID"
+CMD sh -c '\
+./alist server \
+--db-type="${ALIST_DB_TYPE:-postgres}" \
+--db-host="${ALIST_DB_HOST}" \
+--db-port="${ALIST_DB_PORT:-5432}" \
+--db-user="${ALIST_DB_USER}" \
+--db-pass="${ALIST_DB_PASS}" \
+--db-name="${ALIST_DB_NAME}"'
